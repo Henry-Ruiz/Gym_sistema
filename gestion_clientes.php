@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
     exit();
 }
@@ -29,7 +29,9 @@ $result = mysqli_query($conn, $query);
         <div class="logo">CorpusLine Gym</div>
         <div class="menu">
             <a href="dashboard_admin.php">Dashboard</a>
-            <a href="add_cliente.php">Añadir Cliente</a>
+            <?php if ($_SESSION['role'] == 'admin') { ?>
+                <a href="add_cliente.php">Añadir Cliente</a>
+            <?php } ?>
             <a href="logout.php">Cerrar sesión</a>
         </div>
     </div>
@@ -52,7 +54,9 @@ $result = mysqli_query($conn, $query);
                     <th>Descripción</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
-                    <th>Acciones</th>
+                    <?php if ($_SESSION['role'] == 'admin') { ?>
+                        <th>Acciones</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody>
@@ -66,10 +70,12 @@ $result = mysqli_query($conn, $query);
                         <td><?php echo $cliente['descripcion']; ?></td>
                         <td><?php echo $cliente['fecha_inicio']; ?></td>
                         <td><?php echo $cliente['fecha_fin']; ?></td>
-                        <td>
-                            <a href="edit_cliente.php?id=<?php echo $cliente['id']; ?>">Editar</a>
-                            <a href="delete_cliente.php?id=<?php echo $cliente['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente?');">Eliminar</a>
-                        </td>
+                        <?php if ($_SESSION['role'] == 'admin') { ?>
+                            <td>
+                                <a href="edit_cliente.php?id=<?php echo $cliente['id']; ?>">Editar</a> |
+                                <a href="delete_cliente.php?id=<?php echo $cliente['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente?');">Eliminar</a>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
             </tbody>
