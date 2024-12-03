@@ -12,6 +12,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'empleado') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Empleado</title>
     <link rel="stylesheet" href="styles.css"> <!-- Archivo de estilo externo -->
+    <style>
+        /* Estilo para centrar la imagen */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Ajusta la altura según sea necesario */
+        }
+        .image-container img {
+            max-width: 100%; /* Ajusta el tamaño de la imagen */
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
@@ -26,7 +39,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'empleado') {
     </div>
     <div class="content">
         <h1>Bienvenido, Empleado</h1>
-        <p>Aquí puedes gestionar los productos, ventas y clientes del gimnasio, así como generar reportes de stock.</p>
+        <!-- Contenedor para la imagen -->
+        <div class="image-container">
+            <img src="logo2.png" alt="Dashboard Empleado">
+        </div>
     </div>
 </body>
 </html>
